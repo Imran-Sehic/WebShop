@@ -3,5 +3,5 @@ This is a WebShop application built in JSF-Java Server Faces framework. The appl
 The application uses Hibernate and JPA to communicate to the mySQL database where all the data is stored.</br></br>
 Below are some of the screenshots of the application itself.
 
-##1.Login
-<img src="images/screenshot7.png" width=400 align=center>
+## 1.Login
+<img src="images/screenshot7.png" width=400 align=middle>

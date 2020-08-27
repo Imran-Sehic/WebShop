@@ -4,4 +4,4 @@ The application uses Hibernate and JPA to communicate to the mySQL database wher
 Below are some of the screenshots of the application itself.
 
 ## 1.Login
-<img src="images/screenshot7.png" width=400 align=middle>
+<img src="images/screenshot7.png" width=700>

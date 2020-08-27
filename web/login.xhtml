@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Login</title>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&amp;display=swap" rel="stylesheet"/>
+        <link href="style/loginRegisterStyle.css" rel="stylesheet"/>
+    </h:head>
+    <h:body>
+        <div id="header">Web-Shop</div>
+        <div id="errorLbl"><h:outputLabel value="#{userManagedBean.loginError}"/></div>
+        <h1>Login</h1>
+        <h:form>
+            <fieldset>
+                <h:outputLabel value="Username"/><br/>
+                <h:inputText value="#{userManagedBean.username}"/><br/>
+                <h:outputLabel value="Password"/><br/>
+                <h:inputSecret value="#{userManagedBean.password}"></h:inputSecret><br/>
+                <h:commandButton styleClass="button" value="Login" action="#{userManagedBean.login()}"/><br/>
+                <h:outputLabel styleClass="label">Not registered? Register <h:commandLink action="#{userManagedBean.goToRegister()}" value="here"/></h:outputLabel> 
+            </fieldset> 
+        </h:form>
+        <p id="copyrights">Copyright &copy; 2020 by Web-Shop</p>
+    </h:body>
+</html>
+

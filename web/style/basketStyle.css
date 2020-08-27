@@ -1,0 +1,70 @@
+body{
+    font-size: 25px;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    background-color: whitesmoke;
+}
+
+.welcomeLbl{
+    font-size: 35px;
+}
+
+.table{
+    font-size: 18px;
+    border: 1px solid black;
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+tr, th{
+    border: 1px solid black;
+    padding: 10px;
+}
+
+td{
+    border: 1px solid black;
+    padding: 0;
+}
+
+th{
+    color: white;
+    background-color: cornflowerblue;
+}
+
+.deleteFromBasketBtn{
+    width: 100%;
+    font-size: 25px;
+    height: 100%;
+    background: none;
+    border: 2px solid rgb(256, 66, 0);
+    color: rgb(256, 66, 0);
+    transition: 0.3s ease-in-out;
+}
+
+.deleteFromBasketBtn:hover{
+    color: white;
+    background-color: rgb(256, 66, 0);
+}
+
+.updateQuantity input{
+    width: 33%;
+    font-size: 25px;
+    height: 100%;
+    background: none;
+    border: 2px solid cornflowerblue;
+    color: cornflowerblue;
+    transition: 0.3s ease-in-out;
+}
+
+.updateQuantity input:hover{
+    background-color: cornflowerblue;
+    color: white;
+}
+
+.updateQuantity{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

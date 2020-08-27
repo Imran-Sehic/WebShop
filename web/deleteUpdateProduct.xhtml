@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Delete Product</title>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&amp;display=swap" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+        <link href="style/deleteUpdateProductStyle.css" rel="stylesheet"/>
+        <link href="shared/headerStyle.css" rel="stylesheet"/>
+    </h:head>
+    <h:body>
+        <ui:include src="shared/header.xhtml"/><br/>
+        <h:outputLabel styleClass="WelcomeLbl" value="#{productManagedBean.isUsersProductEmpty()}"/><br/><br/>
+        <h:form>
+            <h:dataTable styleClass="table" rendered="#{!productManagedBean.isUsersProductEmpty}" value="#{productManagedBean.allUsersProducts}" var="product" >
+                <h:column>
+                    <f:facet name="header">Delete</f:facet>
+                    <h:commandLink action="#{productManagedBean.deleteProduct(product.id)}">
+                        <button class="deleteBtn"><i class="fa fa-trash-o"></i></button>
+                    </h:commandLink>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Id</f:facet>
+                        #{product.id}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Name</f:facet>
+                        #{product.name}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Price</f:facet>
+                        #{product.price}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Update</f:facet>
+                    <h:commandLink action="#{productManagedBean.goToUpdateProduct(product.name, product.price, product.id)}">
+                        <button class="updateBtn"><i class="fa fa-refresh"></i></button>
+                    </h:commandLink>
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </h:body>
+</html>
+

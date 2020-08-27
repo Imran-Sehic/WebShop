@@ -1,0 +1,27 @@
+body{
+    text-align: center;
+    font-size: 25px;
+    font-family: 'Montserrat', sans-serif;
+    background-color: whitesmoke;
+}
+
+fieldset{
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+.updateBtn{
+    background: none;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    color: cornflowerblue;
+    border: 2px solid cornflowerblue;
+    margin: 10px;
+    transition: 0.3s ease-in-out;
+}
+
+.updateBtn:hover{
+    background: cornflowerblue;
+    color: white;
+}
+

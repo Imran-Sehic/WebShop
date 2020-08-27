@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&amp;display=swap" rel="stylesheet"/>
+    </h:head>
+    <h:body>
+        <div id="nav">
+            <h:form id="navForm">
+                <div>
+                    <h:commandLink styleClass="logo" action="products" value="Web-Shop"/>
+                    <h:selectOneMenu styleClass="selectMenu" value="#{navigationBean.option}">
+                        <f:selectItem itemLabel="Navigate to..." itemDisabled="true"/>
+                        <f:selectItems value="#{navigationBean.options}"/>
+                        <f:ajax listener="#{navigationBean.valueChanged()}"/>
+                    </h:selectOneMenu>
+                </div>
+                <div>
+                    <h:outputLabel styleClass="name" value="#{userManagedBean.user.name}"/>&nbsp;
+                    <h:outputLabel styleClass="name" value="#{userManagedBean.user.surname}"/>&nbsp;&nbsp;
+                    <h:commandButton styleClass="logout" action="#{userManagedBean.logout()}" value="Logout"/>
+                </div>
+            </h:form>
+        </div>
+    </h:body>
+</html>
+

@@ -1,0 +1,22 @@
+body{
+    font-size: 25px;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    background-color: whitesmoke;
+}
+
+.deleteBtn{
+    color: cornflowerblue;
+    border: 2px solid cornflowerblue;
+    background: none;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    transition: 0.3s ease-in-out;
+}
+
+.deleteBtn:hover{
+    color: white;
+    background-color: cornflowerblue;
+}
+
+

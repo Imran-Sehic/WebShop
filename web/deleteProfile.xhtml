@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Delete Profile</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+        <link href="style/deleteProfileStyle.css" rel="stylesheet"/>
+        <link href="shared/headerStyle.css" rel="stylesheet"/>
+    </h:head>
+    <h:body>
+        <ui:include src="shared/header.xhtml"/>
+        <br/>
+        <h:outputLabel style="font-size: 35px;" value="Are you sure you want to delete your user profile?"/><br/>
+        <h:outputLabel style="font-size: 25px;" value="All of the products in the basket will be deleted!"/><br/><br/>
+        <h:form>
+            <h:commandButton styleClass="deleteBtn" value="Delete" action="#{personManagedBean.deleteProfile()}"/>
+        </h:form>
+    </h:body>
+</html>
+

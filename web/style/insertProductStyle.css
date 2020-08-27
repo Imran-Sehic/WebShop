@@ -1,0 +1,33 @@
+body{
+    text-align: center;
+    font-size: 25px;
+    font-family: 'Montserrat', sans-serif;
+    background-color: whitesmoke;
+}
+
+fieldset{
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+.insertProduct{
+    background: none;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    color: cornflowerblue;
+    border: 2px solid cornflowerblue;
+    margin: 10px;
+    transition: 0.3s ease-in-out;
+}
+
+.insertProduct:hover{
+    background: cornflowerblue;
+    color: white;
+}
+
+#errorLbl{
+    background-color: rgb(256, 66, 0);
+    color: white;
+    font-size: 18px;
+}
+

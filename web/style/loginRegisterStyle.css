@@ -1,0 +1,51 @@
+body{
+    text-align: center;
+    font-size: 25px;
+    font-family: 'Montserrat', sans-serif;
+    background-color: whitesmoke;
+}
+
+fieldset{
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+#header{
+    padding: 15px;
+    background-color: cornflowerblue;
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+}
+
+.button{
+    background: none;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    color: cornflowerblue;
+    border: 2px solid cornflowerblue;
+    margin: 10px;
+    transition: 0.3s ease-in-out;
+}
+
+.button:hover{
+    background: cornflowerblue;
+    color: white;
+}
+
+.label{
+    font-size: 16px;
+    margin: 10px;
+}
+
+#errorLbl{
+    background-color: rgb(256, 66, 0);
+    color: white;
+    font-size: 18px;
+}
+
+#copyrights{
+    font-size: 12px;
+    margin-top: 50px;
+}
+

@@ -4,7 +4,8 @@ The application uses Hibernate and JPA to communicate to the mySQL database wher
 Below are some of the screenshots of the application itself.
 
 ## 1.Login
-<p align="center"><img src="images/screenshot7.png" width=600></p>
+<p align="center"><img src="images/screenshot7.png" width=600></p></br>
+
 ## 2.Register
 <p align="center"><img src="images/screenshot8.png" width=600></p></br>
 ## 3.Products

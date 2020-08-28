@@ -1,7 +1,8 @@
-package business;
+package business.productSessionBeans;
 
-import business.model.Product;
-import business.model.User;
+import models.Product;
+import models.User;
+import models.UserProduct;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -23,5 +24,7 @@ public interface ProductSessionBeanLocal {
     public void updateProduct(String name, double price, int productId);
     
     public void deleteFromBasket(int purchaseId);
+    
+    public List<UserProduct> getAllProductsForUser(User user);
     
 }

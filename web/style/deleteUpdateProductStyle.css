@@ -49,7 +49,7 @@ th{
     background-color: cornflowerblue;
 }
 
-.deleteBtn{
+.deleteProfileBtn{
     color: rgb(256, 66, 0);
     border: 2px solid rgb(256, 66, 0);
     background: none;
@@ -59,7 +59,7 @@ th{
     transition: 0.3s ease-in-out;
 }
 
-.deleteBtn:hover{
+.deleteProfileBtn:hover{
     color: white;
     background-color: rgb(256, 66, 0);
 }

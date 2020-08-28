@@ -1,4 +1,4 @@
-package business;
+package business.authenticationSessionBeans;
 
 import javax.ejb.Local;
 

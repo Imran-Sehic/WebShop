@@ -11,7 +11,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.UserManagedBean;
+import managedBeans.UserManagedBean;
 
 public class LoginFilter implements Filter {
 
@@ -25,22 +25,22 @@ public class LoginFilter implements Filter {
 
         // managed bean name is exactly the session attribute name
         UserManagedBean userManager = (UserManagedBean) httpServletRequest.getSession().getAttribute("userManagedBean");
-
+        
         if (userManager != null) {
             if (userManager.isLoggedIn()) {
                 filterChain.doFilter(servletRequest, servletResponse);
-            } else{
+            } else {
                 httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + LOGIN_PAGE);
             }
         } else {
             httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + LOGIN_PAGE);
         }
-        
+
     }
 
     @Override
     public void init(FilterConfig config) throws ServletException {
-        
+
     }
 
     @Override

@@ -5,7 +5,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Delete Product</title>
+        <title>Delete-Update Product</title>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&amp;display=swap" rel="stylesheet"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
         <link href="style/deleteUpdateProductStyle.css" rel="stylesheet"/>
@@ -19,7 +19,7 @@
                 <h:column>
                     <f:facet name="header">Delete</f:facet>
                     <h:commandLink action="#{productManagedBean.deleteProduct(product.id)}">
-                        <button class="deleteBtn"><i class="fa fa-trash-o"></i></button>
+                        <button class="deleteProfileBtn"><i class="fa fa-trash-o"></i></button>
                     </h:commandLink>
                 </h:column>
                 <h:column>

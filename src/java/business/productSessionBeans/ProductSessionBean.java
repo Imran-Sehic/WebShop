@@ -1,8 +1,8 @@
-package business;
+package business.productSessionBeans;
 
-import business.model.Product;
-import business.model.User;
-import business.model.UserProduct;
+import models.Product;
+import models.User;
+import models.UserProduct;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.ejb.Stateless;
@@ -53,7 +53,7 @@ public class ProductSessionBean implements ProductSessionBeanLocal {
         if (list.size() > 0) {
             return false;
         }
-        
+
         Product product = new Product();
         product.setName(name);
         product.setPrice(price);
@@ -74,9 +74,9 @@ public class ProductSessionBean implements ProductSessionBeanLocal {
     public void deleteProduct(int productId) {
         Query query = entityManager.createNamedQuery("Product.findById");
         query.setParameter("id", productId);
-        
+
         Product product = (Product) query.getSingleResult();
-        
+
         entityManager.remove(product);
     }
 
@@ -93,9 +93,21 @@ public class ProductSessionBean implements ProductSessionBeanLocal {
     public void deleteFromBasket(int purchaseId) {
         Query query = entityManager.createNamedQuery("UserProduct.findById");
         query.setParameter("id", purchaseId);
-        
+
         UserProduct userProduct = (UserProduct) query.getSingleResult();
         entityManager.remove(userProduct);
     }
-    
+
+    @Override
+    public List<UserProduct> getAllProductsForUser(User user) {
+        Query query = entityManager.createNamedQuery("UserProduct.findByUserId");
+        query.setParameter("userId", user);
+        List<UserProduct> list = query.getResultList();
+        if (!list.isEmpty()) {
+            return list;
+        } else {
+            return null;
+        }
+    }
+
 }

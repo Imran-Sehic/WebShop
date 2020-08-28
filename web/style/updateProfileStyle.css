@@ -10,7 +10,7 @@ fieldset{
     margin-right: 25%;
 }
 
-.updateBtn{
+.updateProfileBtn{
     background: none;
     font-size: 16px;
     font-family: 'Montserrat', sans-serif;
@@ -20,7 +20,7 @@ fieldset{
     transition: 0.3s ease-in-out;
 }
 
-.updateBtn:hover{
+.updateProfileBtn:hover{
     background: cornflowerblue;
     color: white;
 }

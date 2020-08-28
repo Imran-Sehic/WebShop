@@ -1,4 +1,4 @@
-package business.model;
+package models;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -51,6 +51,10 @@ public class UserProduct implements Serializable {
     public UserProduct(Integer id, int quantity) {
         this.id = id;
         this.quantity = quantity;
+    }
+
+    public UserProduct(int id, User user, Product product, int quantity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public Integer getId() {

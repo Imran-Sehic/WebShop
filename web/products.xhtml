@@ -18,7 +18,7 @@
         <br/>
         <br/>
         <h:form>
-            <h:dataTable styleClass="table" rendered="#{!productManagedBean.isTableEmpty}" value="#{productManagedBean.allProductsToBuy}" var="product" >
+            <h:dataTable id="table" styleClass="table" rendered="#{!productManagedBean.isTableEmpty}" value="#{productManagedBean.allProductsToBuy}" var="product" >
                 <h:column>
                     <f:facet name="header">Id</f:facet>
                         #{product.id}
@@ -33,8 +33,9 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header">Buy</f:facet>
-                    <h:commandLink action="#{productManagedBean.buyProduct(product.id)}">
+                    <h:commandLink actionListener="#{productManagedBean.buyProduct(product.id)}">
                         <button class="buyBtn"><i class="fa fa-shopping-cart"></i></button>
+                        <f:ajax execute="@form" render="table"/>
                     </h:commandLink>
                 </h:column>
             </h:dataTable>

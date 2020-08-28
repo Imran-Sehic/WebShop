@@ -5,7 +5,7 @@ body{
     background-color: whitesmoke;
 }
 
-.deleteBtn{
+.deleteProfileBtn{
     color: cornflowerblue;
     border: 2px solid cornflowerblue;
     background: none;
@@ -14,7 +14,7 @@ body{
     transition: 0.3s ease-in-out;
 }
 
-.deleteBtn:hover{
+.deleteProfileBtn:hover{
     color: white;
     background-color: cornflowerblue;
 }

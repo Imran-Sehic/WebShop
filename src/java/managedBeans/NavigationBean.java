@@ -1,4 +1,4 @@
-package beans;
+package managedBeans;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,10 +1,11 @@
-package beans;
+package managedBeans;
 
-import business.LoginSessionBeanLocal;
-import business.ProductSessionBeanLocal;
-import business.model.Product;
-import business.model.User;
-import business.model.UserProduct;
+import business.authenticationSessionBeans.LoginSessionBeanLocal;
+import business.productSessionBeans.ProductSessionBeanLocal;
+import business.userSessionBeans.UserSessionBeanLocal;
+import models.Product;
+import models.User;
+import models.UserProduct;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
@@ -30,12 +31,14 @@ public class ProductManagedBean implements Serializable {
     private Product product;
 
     @EJB
-    private ProductSessionBeanLocal productBean;
+    private ProductSessionBeanLocal productSessionBean;
     @EJB
-    private LoginSessionBeanLocal loginBean;
+    private LoginSessionBeanLocal loginSessionBean;
+    @EJB
+    private UserSessionBeanLocal userSessionBean;
 
     @ManagedProperty(value = "#{userManagedBean}")
-    private UserManagedBean userBean;
+    private UserManagedBean userManagedBean;
 
     public ProductManagedBean() {
     }
@@ -117,31 +120,31 @@ public class ProductManagedBean implements Serializable {
     }
 
     public UserManagedBean getUserBean() {
-        return userBean;
+        return userManagedBean;
     }
 
     public void setUserBean(UserManagedBean userBean) {
-        this.userBean = userBean;
+        this.userManagedBean = userBean;
     }
 
     public List<Product> getAllProductsToBuy() {
-        if (productBean.getAllProductsToBuy(userBean.getUser()).isEmpty()) {
+        if (productSessionBean.getAllProductsToBuy(userManagedBean.getUser()).isEmpty()) {
             return null;
         } else {
-            return productBean.getAllProductsToBuy(userBean.getUser());
+            return productSessionBean.getAllProductsToBuy(userManagedBean.getUser());
         }
     }
 
     public List<Product> getAllUsersProducts() {
-        if (productBean.getAllUsersProduct(userBean.getUser()).isEmpty()) {
+        if (productSessionBean.getAllUsersProduct(userManagedBean.getUser()).isEmpty()) {
             return null;
         } else {
-            return productBean.getAllUsersProduct(userBean.getUser());
+            return productSessionBean.getAllUsersProduct(userManagedBean.getUser());
         }
     }
 
     public String isTableEmpty() {
-        if (productBean.getAllProductsToBuy(userBean.getUser()).isEmpty()) {
+        if (productSessionBean.getAllProductsToBuy(userManagedBean.getUser()).isEmpty()) {
             setIsTableEmpty(true);
             return "No products available!";
         } else {
@@ -151,7 +154,7 @@ public class ProductManagedBean implements Serializable {
     }
 
     public String isUsersProductEmpty() {
-        if (productBean.getAllUsersProduct(userBean.getUser()).isEmpty()) {
+        if (productSessionBean.getAllUsersProduct(userManagedBean.getUser()).isEmpty()) {
             setIsUsersProductEmpty(true);
             return "You have no products published!";
         } else {
@@ -161,8 +164,8 @@ public class ProductManagedBean implements Serializable {
     }
 
     public String isBasketEmpty() {
-        User user = loginBean.getNewInstanceOfUser(userBean.getUser().getUsername(), userBean.getUser().getPassword());
-        List<UserProduct> userProduct = loginBean.getAllProductsForUser(userBean.getUser());
+        User user = userSessionBean.getNewInstanceOfUser(userManagedBean.getUser().getUsername(), userManagedBean.getUser().getPassword());
+        List<UserProduct> userProduct = productSessionBean.getAllProductsForUser(userManagedBean.getUser());
         if (userProduct != null) {
             user.setUserProductList(userProduct);
         }
@@ -177,8 +180,8 @@ public class ProductManagedBean implements Serializable {
     }
 
     public void buyProduct(int productId) {
-        User user = loginBean.getNewInstanceOfUser(userBean.getUser().getUsername(), userBean.getUser().getPassword());
-        List<UserProduct> userProduct = loginBean.getAllProductsForUser(userBean.getUser());
+        User user = userSessionBean.getNewInstanceOfUser(userManagedBean.getUser().getUsername(), userManagedBean.getUser().getPassword());
+        List<UserProduct> userProduct = productSessionBean.getAllProductsForUser(userManagedBean.getUser());
         if (userProduct != null) {
             user.setUserProductList(userProduct);
         }
@@ -186,16 +189,16 @@ public class ProductManagedBean implements Serializable {
             int quantity = purchase.getQuantity();
             if (productId == purchase.getProductId().getId()) {
                 quantity++;
-                productBean.updateBuy(quantity, purchase.getId());
+                productSessionBean.updateBuy(quantity, purchase.getId());
                 return;
             }
         }
-        productBean.buyProduct(user, productId);
+        productSessionBean.buyProduct(user, productId);
     }
 
     public List<UserProduct> getProductsFromBasket() {
-        User user = loginBean.getNewInstanceOfUser(userBean.getUser().getUsername(), userBean.getUser().getPassword());
-        List<UserProduct> userProduct = loginBean.getAllProductsForUser(userBean.getUser());
+        User user = userSessionBean.getNewInstanceOfUser(userManagedBean.getUser().getUsername(), userManagedBean.getUser().getPassword());
+        List<UserProduct> userProduct = productSessionBean.getAllProductsForUser(userManagedBean.getUser());
         if (userProduct != null) {
             user.setUserProductList(userProduct);
         }
@@ -203,18 +206,18 @@ public class ProductManagedBean implements Serializable {
     }
 
     public String increaseBuy(int id, int quantity) {
-        User user = loginBean.getNewInstanceOfUser(userBean.getUser().getUsername(), userBean.getUser().getPassword());
-        List<UserProduct> userProduct = loginBean.getAllProductsForUser(userBean.getUser());
+        User user = userSessionBean.getNewInstanceOfUser(userManagedBean.getUser().getUsername(), userManagedBean.getUser().getPassword());
+        List<UserProduct> userProduct = productSessionBean.getAllProductsForUser(userManagedBean.getUser());
         if (userProduct != null) {
             user.setUserProductList(userProduct);
         }
-        productBean.updateBuy(++quantity, id);
+        productSessionBean.updateBuy(++quantity, id);
         return "basket?faces-redirect=true";
     }
 
     public String decreaseBuy(int id, int quantity) {
-        User user = loginBean.getNewInstanceOfUser(userBean.getUser().getUsername(), userBean.getUser().getPassword());
-        List<UserProduct> userProduct = loginBean.getAllProductsForUser(userBean.getUser());
+        User user = userSessionBean.getNewInstanceOfUser(userManagedBean.getUser().getUsername(), userManagedBean.getUser().getPassword());
+        List<UserProduct> userProduct = productSessionBean.getAllProductsForUser(userManagedBean.getUser());
         if (userProduct != null) {
             user.setUserProductList(userProduct);
         }
@@ -222,10 +225,10 @@ public class ProductManagedBean implements Serializable {
         int quantityDecreasedByOne = --quantity;
 
         if (quantityDecreasedByOne == 0) {
-            productBean.deleteFromBasket(id);
+            productSessionBean.deleteFromBasket(id);
             return "basket?faces-redirect=true";
         } else {
-            productBean.updateBuy(quantityDecreasedByOne, id);
+            productSessionBean.updateBuy(quantityDecreasedByOne, id);
             return "basket?faces-redirect=true";
         }
     }
@@ -238,7 +241,7 @@ public class ProductManagedBean implements Serializable {
             return "insertProduct?faces-redirect=true";
         }
 
-        if (productBean.insertProduct(name, price, userBean.getUser())) {
+        if (productSessionBean.insertProduct(name, price, userManagedBean.getUser())) {
             setInsertProductMessage("");
             clearFields();
             return "products?faces-redirect=true";
@@ -250,7 +253,7 @@ public class ProductManagedBean implements Serializable {
     }
 
     public String deleteProduct(int productId) {
-        productBean.deleteProduct(productId);
+        productSessionBean.deleteProduct(productId);
         return "deleteUpdateProduct?faces-redirect=true";
     }
 
@@ -263,18 +266,18 @@ public class ProductManagedBean implements Serializable {
     }
     
     public String updateProduct(){
-        productBean.updateProduct(product.getName(), product.getPrice(), product.getId());
+        productSessionBean.updateProduct(product.getName(), product.getPrice(), product.getId());
         return "deleteUpdateProduct?faces-redirect=true";
     }
 
     public String deleteFromBasket(int purchaseId) {
-        productBean.deleteFromBasket(purchaseId);
+        productSessionBean.deleteFromBasket(purchaseId);
         return "basket?faces-redirect=true";
     }
 
     public void clearFields() {
         setName("");
-        setPrice(0.0);
+        setPrice(null);
     }
 
 }

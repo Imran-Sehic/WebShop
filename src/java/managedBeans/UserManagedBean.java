@@ -1,13 +1,13 @@
-package beans;
+package managedBeans;
 
-import business.LoginSessionBeanLocal;
-import business.RegisterSessionBeanLocal;
-import business.model.User;
+import business.authenticationSessionBeans.LoginSessionBeanLocal;
+import business.authenticationSessionBeans.RegisterSessionBeanLocal;
+import models.User;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import business.UserSessionBeanLocal;
+import business.userSessionBeans.UserSessionBeanLocal;
 
 @ManagedBean(name = "userManagedBean")
 @SessionScoped
@@ -158,7 +158,7 @@ public class UserManagedBean implements Serializable {
     }
     
     public String deleteProfile(){
-        loginBean.deleteProfile(user.getUsername(), user.getPassword());
+        userBean.deleteProfile(user.getUsername(), user.getPassword());
         return logout();
     }
     

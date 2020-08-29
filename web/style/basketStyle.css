@@ -37,30 +37,26 @@ th{
     width: 100%;
     font-size: 25px;
     height: 100%;
-    background: none;
-    border: 2px solid rgb(256, 66, 0);
-    color: rgb(256, 66, 0);
+    background: rgb(256, 66, 0);;
+    color: white;
     transition: 0.3s ease-in-out;
 }
 
 .deleteFromBasketBtn:hover{
-    color: white;
-    background-color: rgb(256, 66, 0);
+    background-color: rgb(255, 120, 120);
 }
 
 .updateQuantity input{
     width: 33%;
     font-size: 25px;
     height: 100%;
-    background: none;
-    border: 2px solid cornflowerblue;
-    color: cornflowerblue;
+    background: cornflowerblue;
+    color: white;
     transition: 0.3s ease-in-out;
 }
 
 .updateQuantity input:hover{
-    background-color: cornflowerblue;
-    color: white;
+    background-color: lightblue;
 }
 
 .updateQuantity{

@@ -13,6 +13,7 @@ import business.userSessionBeans.UserSessionBeanLocal;
 @SessionScoped
 public class UserManagedBean implements Serializable {
 
+    //local private fields
     private String username;
     private String password;
     private String name;
@@ -22,16 +23,19 @@ public class UserManagedBean implements Serializable {
     
     private User user;
 
+    //session beans injection
     @EJB
-    RegisterSessionBeanLocal registerBean;
+    RegisterSessionBeanLocal registerSessionBean;
     @EJB
-    LoginSessionBeanLocal loginBean;
+    LoginSessionBeanLocal loginSessionBean;
     @EJB
-    UserSessionBeanLocal userBean;
+    UserSessionBeanLocal userSessionBean;
 
+    //constructor
     public UserManagedBean() {
     }
 
+    //get and set methods
     public String getUsername() {
         return username;
     }
@@ -84,8 +88,9 @@ public class UserManagedBean implements Serializable {
         this.registerError = registerError;
     }
 
+    //managed bean methods
     public String login() {
-        user = loginBean.login(username, password);
+        user = loginSessionBean.login(username, password);
         
         if (username == null && password == null) {
             return "login?faces-redirect=true";
@@ -127,7 +132,7 @@ public class UserManagedBean implements Serializable {
             return "register?faces-redirect=true";
         }
 
-        if (registerBean.register(name, surname, username, password)) {
+        if (registerSessionBean.register(name, surname, username, password)) {
             setRegisterError("");
             clearFields();
             return "login?faces-redirect=true";
@@ -158,12 +163,12 @@ public class UserManagedBean implements Serializable {
     }
     
     public String deleteProfile(){
-        userBean.deleteProfile(user.getUsername(), user.getPassword());
+        userSessionBean.deleteProfile(user.getUsername(), user.getPassword());
         return logout();
     }
     
     public String updateProfile(){
-        userBean.updateProfile(user);
+        userSessionBean.updateProfile(user);
         return "products?faces-redirect=true";
     }
 

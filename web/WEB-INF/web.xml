@@ -26,11 +26,11 @@
         <filter-name>loginFilter</filter-name>
         <url-pattern>/faces/products.xhtml</url-pattern>
         <url-pattern>/faces/basket.xhtml</url-pattern>
-        <url-pattern>/faces/deleteProfile.xhtml</url-pattern>
-        <url-pattern>/faces/updateProfile.xhtml</url-pattern>
         <url-pattern>/faces/insertProduct.xhtml</url-pattern>
         <url-pattern>/faces/deleteUpdateProduct.xhtml</url-pattern>
         <url-pattern>/faces/updateProduct.xhtml</url-pattern>
+        <url-pattern>/faces/updateProfile.xhtml</url-pattern>
+        <url-pattern>/faces/deleteProfile.xhtml</url-pattern>
     </filter-mapping>
     <welcome-file-list>
         <welcome-file>faces/login.xhtml</welcome-file>

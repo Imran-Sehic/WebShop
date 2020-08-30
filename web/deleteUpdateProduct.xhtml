@@ -13,7 +13,7 @@
     </h:head>
     <h:body>
         <ui:include src="shared/header.xhtml"/><br/>
-        <h:outputLabel styleClass="WelcomeLbl" value="#{productManagedBean.isUsersProductEmpty()}"/><br/><br/>
+        <h:outputLabel styleClass="WelcomeLbl" value="#{productManagedBean.areThereUsersProducts()}"/><br/><br/>
         <h:form>
             <h:dataTable styleClass="table" rendered="#{!productManagedBean.isUsersProductEmpty}" value="#{productManagedBean.allUsersProducts}" var="product" >
                 <h:column>

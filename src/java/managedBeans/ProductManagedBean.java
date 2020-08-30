@@ -1,6 +1,5 @@
 package managedBeans;
 
-import business.authenticationSessionBeans.LoginSessionBeanLocal;
 import business.productSessionBeans.ProductSessionBeanLocal;
 import business.userSessionBeans.UserSessionBeanLocal;
 import models.Product;
@@ -20,22 +19,16 @@ public class ProductManagedBean implements Serializable {
     //local variables
     private String name;
     private Double price;
-    private String emptyMessage;
     private boolean isTableEmpty;
-    private String emptyBasketMessage;
-    private boolean isBasketEmpty;
-    private String emptyUsersProductMessage;
     private boolean isUsersProductEmpty;
 
     private String insertProductMessage;
-    
+
     private Product product;
 
     //session beans injection
     @EJB
     private ProductSessionBeanLocal productSessionBean;
-    @EJB
-    private LoginSessionBeanLocal loginSessionBean;
     @EJB
     private UserSessionBeanLocal userSessionBean;
 
@@ -63,44 +56,12 @@ public class ProductManagedBean implements Serializable {
         this.price = price;
     }
 
-    public String getEmptyMessage() {
-        return emptyMessage;
-    }
-
-    public void setEmptyMessage(String emptyMessage) {
-        this.emptyMessage = emptyMessage;
-    }
-
     public boolean getIsTableEmpty() {
         return isTableEmpty;
     }
 
     public void setIsTableEmpty(boolean isTableEmpty) {
         this.isTableEmpty = isTableEmpty;
-    }
-
-    public String getEmptyBasketMessage() {
-        return emptyBasketMessage;
-    }
-
-    public void setEmptyBasketMessage(String emptyBasketMessage) {
-        this.emptyBasketMessage = emptyBasketMessage;
-    }
-
-    public boolean getIsBasketEmpty() {
-        return isBasketEmpty;
-    }
-
-    public void setIsBasketEmpty(boolean isBasketEmpty) {
-        this.isBasketEmpty = isBasketEmpty;
-    }
-
-    public String getEmptyUsersProductMessage() {
-        return emptyUsersProductMessage;
-    }
-
-    public void setEmptyUsersProductMessage(String emptyUsersProductMessage) {
-        this.emptyUsersProductMessage = emptyUsersProductMessage;
     }
 
     public boolean isIsUsersProductEmpty() {
@@ -130,9 +91,9 @@ public class ProductManagedBean implements Serializable {
     public void setUserManagedBean(UserManagedBean userManagedBean) {
         this.userManagedBean = userManagedBean;
     }
-    
+
     //managed bean methods
-    public User refreshUserInformation(){
+    public User refreshUserInformation() {
         User user = userSessionBean.getNewInstanceOfUser(userManagedBean.getUser().getUsername(), userManagedBean.getUser().getPassword());
         List<UserProduct> userProduct = productSessionBean.getAllProductsForUser(userManagedBean.getUser());
         if (userProduct != null) {
@@ -142,23 +103,11 @@ public class ProductManagedBean implements Serializable {
     }
 
     public List<Product> getAllProductsToBuy() {
-        if (productSessionBean.getAllProductsToBuy(userManagedBean.getUser()).isEmpty()) {
-            return null;
-        } else {
-            return productSessionBean.getAllProductsToBuy(userManagedBean.getUser());
-        }
+        return productSessionBean.getAllProductsToBuy(userManagedBean.getUser());
     }
 
-    public List<Product> getAllUsersProducts() {
-        if (productSessionBean.getAllUsersProduct(userManagedBean.getUser()).isEmpty()) {
-            return null;
-        } else {
-            return productSessionBean.getAllUsersProduct(userManagedBean.getUser());
-        }
-    }
-
-    public String isTableEmpty() {
-        if (productSessionBean.getAllProductsToBuy(userManagedBean.getUser()).isEmpty()) {
+    public String areThereProductsToBuy() {
+        if (getAllProductsToBuy().isEmpty()) {
             setIsTableEmpty(true);
             return "No products available!";
         } else {
@@ -167,31 +116,23 @@ public class ProductManagedBean implements Serializable {
         }
     }
 
-    public String isUsersProductEmpty() {
-        if (productSessionBean.getAllUsersProduct(userManagedBean.getUser()).isEmpty()) {
+    public List<Product> getAllUsersProducts() {
+        return productSessionBean.getAllUsersProduct(userManagedBean.getUser());
+    }
+
+    public String areThereUsersProducts() {
+        if (getAllUsersProducts().isEmpty()) {
             setIsUsersProductEmpty(true);
             return "You have no products published!";
         } else {
             setIsUsersProductEmpty(false);
-            return "Below are your products!";
-        }
-    }
-
-    public String isBasketEmpty() {
-        User user = refreshUserInformation();
-
-        if (user.getUserProductList().isEmpty()) {
-            setIsBasketEmpty(true);
-            return "There are no products in your basket!";
-        } else {
-            setIsBasketEmpty(false);
-            return "Below are the products you bought!";
+            return "Below are the products!";
         }
     }
 
     public void buyProduct(int productId) {
         User user = refreshUserInformation();
-        
+
         for (UserProduct purchase : user.getUserProductList()) {
             int quantity = purchase.getQuantity();
             if (productId == purchase.getProductId().getId()) {
@@ -201,28 +142,6 @@ public class ProductManagedBean implements Serializable {
             }
         }
         productSessionBean.buyProduct(user, productId);
-    }
-
-    public List<UserProduct> getProductsFromBasket() {
-        User user = refreshUserInformation();
-        return user.getUserProductList();
-    }
-
-    public String increaseBuy(int id, int quantity) {
-        productSessionBean.updateBuy(++quantity, id);
-        return "basket?faces-redirect=true";
-    }
-
-    public String decreaseBuy(int id, int quantity) {
-        int quantityDecreasedByOne = --quantity;
-
-        if (quantityDecreasedByOne == 0) {
-            productSessionBean.deleteFromBasket(id);
-            return "basket?faces-redirect=true";
-        } else {
-            productSessionBean.updateBuy(quantityDecreasedByOne, id);
-            return "basket?faces-redirect=true";
-        }
     }
 
     public String insertProduct() {
@@ -256,15 +175,10 @@ public class ProductManagedBean implements Serializable {
         product.setId(productId);
         return "updateProduct?faces-redirect=true";
     }
-    
-    public String updateProduct(){
+
+    public String updateProduct() {
         productSessionBean.updateProduct(product.getName(), product.getPrice(), product.getId());
         return "deleteUpdateProduct?faces-redirect=true";
-    }
-
-    public String deleteFromBasket(int purchaseId) {
-        productSessionBean.deleteFromBasket(purchaseId);
-        return "basket?faces-redirect=true";
     }
 
     public void clearFields() {

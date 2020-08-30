@@ -14,14 +14,14 @@
     <h:body>
         <ui:include src="shared/header.xhtml"/>
         <br/>
-        <h:outputLabel styleClass="welcomeLbl" value="#{productManagedBean.isBasketEmpty()}"/>
+        <h:outputLabel styleClass="welcomeLbl" value="#{basketManagedBean.areThereProductsInTheBasket()}"/>
         <br/>
         <br/>
         <h:form>
-            <h:dataTable rendered="#{!productManagedBean.isBasketEmpty}" styleClass="table" value="#{productManagedBean.productsFromBasket}" var="product">
+            <h:dataTable rendered="#{!basketManagedBean.isBasketEmpty}" styleClass="table" value="#{basketManagedBean.productsFromBasket}" var="product">
                 <h:column>
                     <f:facet name="header">Delete</f:facet>
-                    <h:commandLink actionListener="#{productManagedBean.deleteFromBasket(product.id)}">
+                    <h:commandLink action="#{basketManagedBean.deleteFromBasket(product.id)}">
                         <button class="deleteFromBasketBtn"><i class="fa fa-close"></i></button>
                     </h:commandLink>
                 </h:column>
@@ -40,9 +40,9 @@
                 <h:column>
                     <f:facet name="header">Quantity</f:facet>
                     <div class="updateQuantity">
-                        <h:commandButton value="-" actionListener="#{productManagedBean.decreaseBuy(product.id, product.quantity)}"/>
+                        <h:commandButton value="-" action="#{basketManagedBean.decreaseBuy(product.id, product.quantity)}"/>
                         <h:outputLabel value="#{product.quantity}"/>
-                        <h:commandButton value="+" action="#{productManagedBean.increaseBuy(product.id, product.quantity)}"/>
+                        <h:commandButton value="+" action="#{basketManagedBean.increaseBuy(product.id, product.quantity)}"/>
                     </div>
                 </h:column>
             </h:dataTable>
